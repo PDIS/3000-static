@@ -140,8 +140,8 @@
                                                                             <div class="in">
                                                                                 <div class="ct">
                                                                                     <div class="in">
-                                                                                        <ul data-index="1" data-child="4" class="js-carousel">
-                                                                                            <li data-index="1" style="display: list-item;">
+                                                                                        <ul data-index="1" data-child="4" class="js-carousel" style="overflow: hidden; display: flex;">
+                                                                                            <li data-index="1" style="flex: 1 0 100%; opacity: 1; transition: opacity 4.5s;">
                                                                                                 <div class="simple-pic default" data-index="1" data-type="0" data-child="1">
                                                                                                     <div class="in">
                                                                                                         <div class="ct">
@@ -154,7 +154,7 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </li>
-                                                                                            <li data-index="2" style="display: none;">
+                                                                                            <li data-index="2" style="flex: 1 0 100%; opacity: 0; transition: opacity 4.5s;">
                                                                                                 <div class="simple-pic default" data-index="2" data-type="0" data-child="1">
                                                                                                     <div class="in">
                                                                                                         <div class="ct">
@@ -167,7 +167,7 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </li>
-                                                                                            <li data-index="3" style="display: none;">
+                                                                                            <li data-index="3" style="flex: 1 0 100%; opacity: 0; transition: opacity 4.5s;">
                                                                                                 <div class="simple-pic default" data-index="3" data-type="0" data-child="1">
                                                                                                     <div class="in">
                                                                                                         <div class="ct">
@@ -180,7 +180,7 @@
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </li>
-                                                                                            <li data-index="4" style="display: none;">
+                                                                                            <li data-index="4" style="flex: 1 0 100%; opacity: 0; transition: opacity 4.5s;">
                                                                                                 <div class="simple-pic default" data-index="4" data-type="0" data-child="1">
                                                                                                     <div class="in">
                                                                                                         <div class="ct">
@@ -316,7 +316,7 @@
                                                                                                                             1
                                                                                                                             to
                                                                                                                             July
-                                                                                                                            15</strong>
+                                                                                                                            7</strong>
                                                                                                                     </p>
 
                                                                                                                     <p><strong>Citizens and spouses from overseas with residency permits</strong> may pre-order vouchers from this website and designate at which convenience store to pick them up. Pay online or at the counter of the convenience store after printing out a payment slip at its self-service kiosk.
@@ -536,70 +536,82 @@
 </body>
 
 <script>
-    var lis = $(".js-toggle-title > li");
-    var contents = $(".js-toggle-content > li");
-    var carousels = $(".js-carousel > li");
-    var currentLiIndex = 0;
-    var current = 1
-    var timer = 0;
+    ;(function () {
+        var titles = $(".js-toggle-title > li");
+        var contents = $(".js-toggle-content > li");
+        var carousels = $(".js-carousel > li");
+        var currentLiIndex = 0;
+        var current = 1;
+        var timer = 0;
 
-    function toggleClass(e) {
-        e.preventDefault();
+        function toggleClass(e) {
+            e.preventDefault();
 
-        scrollToBottom();
+            scrollToBottom();
 
-        var self = $(this);
+            var self = $(this);
 
-        lis.each(function (key, element) {
-            if ($(element).data("index") == self.data("index")) {
-                currentLiIndex = parseInt(self.data("index"), 10) + 1;
-                $(self).addClass("is-active");
-            } else {
-                $(element).removeClass("is-active");
-            }
-        });
+            titles.each(function (key, element) {
+                if ($(element).data("index") == self.data("index")) {
+                    currentLiIndex = parseInt(self.data("index"), 10) + 1;
+                    $(self).addClass("is-active");
+                } else {
+                    $(element).removeClass("is-active");
+                }
+            });
 
-        contents.each(function (key, element) {
-            if (parseInt($(element).data("index"), 10) == 1) {
-                return;
-            }
+            contents.each(function (key, element) {
+                if (parseInt($(element).data("index"), 10) == 1) {
+                    return;
+                }
 
-            if (parseInt($(element).data("index"), 10) == currentLiIndex) {
-                $(element).css("display", "list-item");
-            } else {
-                $(element).css("display", "none");
-            }
-        });
-    }
-
-    function scrollToBottom() {
-        if (document.body.clientHeight + document.body.scrollTop != document.body.scrollHeight) {
-            $("body").animate({
-                scrollTop: document.body.scrollHeight
-            }, 1000);
-        }
-    }
-
-    lis.each(function (key, element) {
-        $(element).on("click", toggleClass);
-    });
-    
-
-    timer = setInterval(function () {
-        if (current === carousels.length) {
-            current = 1;
+                if (parseInt($(element).data("index"), 10) == currentLiIndex) {
+                    $(element).css("display", "list-item");
+                } else {
+                    $(element).css("display", "none");
+                }
+            });
         }
 
-        current++;
-
-        carousels.each(function (key, element) {
-            if (parseInt($(element).data("index"), 10) == current) {
-                $(element).css("display", "list-item");
-            } else {
-                $(element).css("display", "none");
+        function scrollToBottom() {
+            if (document.body.clientHeight + document.body.scrollTop != document.body.scrollHeight) {
+                $("body").animate({
+                    scrollTop: document.body.scrollHeight
+                }, 500);
             }
+        }
+
+        // toggle title and contents
+        titles.each(function (key, element) {
+            $(element).on("click", toggleClass);
         });
-    }, 5000);
+
+        // set carousels translateX
+        carousels.each(function (key, carousel) {
+            var index = parseInt($(carousel).data("index"), 10) - 1;
+
+            $(carousels[index]).css("transform", "translateX(-" + index * 100 + "%)");
+        });
+
+        // run carousels
+        timer = setInterval(function () {
+            if (current == carousels.length) {
+                current = 0;
+            }
+
+            carousels.each(function (key, carousel) {
+                var index = parseInt($(carousel).data("index"), 10) - 1;
+
+                if (index != current) {
+                    $(carousels[index]).css("opacity", "0");
+                } else {
+                    $(carousels[index]).css("opacity", "1");
+                }
+            });
+
+            current++;
+        }, 5000);
+    } ());
 </script>
 
 </html>
