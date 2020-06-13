@@ -2235,7 +2235,7 @@ th {
 }
 /* line 434, ../sass/_base-layout.scss */
 .comingsoon > .in > .ct > .in .group-list.major-slider {
-  background-image: url("../Images/bg.jpg");
+  background-image: url("../images/bg.jpg");
   height: 100vh;
   background-size: cover;
   background-position: top left;
@@ -4192,7 +4192,7 @@ th {
   display: block;
   background-color: #ffffff;
   margin: 0 auto;
-  background-image: url(../Images/icon-pic/away-b-top.png);
+  background-image: url(../images/icon-pic/away-b-top.png);
   background-repeat: no-repeat;
   background-position: center;
 }
