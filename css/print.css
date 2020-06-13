@@ -1,0 +1,46 @@
+/* line 1, ../sass/print.scss */
+.sys-root .base-mobile {
+  display: none;
+}
+
+/* line 5, ../sass/print.scss */
+.sys-root .base-extend {
+  display: none;
+}
+
+/* line 9, ../sass/print.scss */
+.sys-root .base-header {
+  display: none;
+}
+
+/* line 13, ../sass/print.scss */
+.sys-root .base-footer {
+  display: none;
+}
+
+/* line 17, ../sass/print.scss */
+.sys-root .base-module-area {
+  display: none;
+}
+
+/* line 21, ../sass/print.scss */
+.sys-root .base-aside {
+  display: none;
+}
+
+/* line 25, ../sass/print.scss */
+.list-text.jump-tool {
+  display: none;
+}
+
+/* line 29, ../sass/print.scss */
+.list-multiple.page-select {
+  display: none;
+}
+
+/* line 33, ../sass/print.scss */
+.list-multiple.page-click {
+  display: none;
+}
+
+/*# sourceMappingURL=print.css.map */
